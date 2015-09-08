@@ -15,8 +15,7 @@ module Name
     end
 
     #database
-    set :database, "sqlite3:///database.db"
-
+    set :database, {adapter: "sqlite3", database: "foo.sqlite3"}
     #filters
 
     #routes
