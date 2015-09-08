@@ -5,9 +5,8 @@ Dir.glob('./lib/*.rb') do |model|
   require model
 end
 
-module Name
+module Flatiron
   class App < Sinatra::Application
-
     #configure
     configure do
       set :root, File.dirname(__FILE__)
@@ -19,8 +18,25 @@ module Name
     #filters
 
     #routes
-    get '/' do
+    # get '/compliment/:banana' do
+    #   "<h1>#{COMPLIMENTS[params["banana"].to_i-1]}</h1>"
+    # end
+
+    get "/compliment" do
+      "<h1>#{Compliment.find(rand(Compliment.count) + 1).title}</h1>"
+    end
+
+    get "/compliments" do
+      @compliments = Compliment.all
       erb :index
+    end
+
+    get "/compliment/:id" do
+      "<h1>#{Compliment.find_by_id(params["id"].to_i).title}</h1><br><a href='/compliments'>HOME</a>"
+    end
+
+    get "/insult" do
+
     end
 
     #helpers
